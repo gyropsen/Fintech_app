@@ -78,16 +78,33 @@ transactions_list = [
 
 
 def filter_by_currency(transactions: list[dict], currency: str):
+    """
+    Возвращает итератор, который выдает по очереди операции с указанием валюты
+    :param transactions: Список словарей транзакция
+    :param currency: Поиск по валюте
+    :return: Словарь транзакции
+    """
     for transaction in transactions:
         if transaction["operationAmount"]["currency"]["code"] == currency:
             yield transaction
 
 
 def transaction_descriptions(transactions: list[dict]):
+    """
+    Возвращает описание каждой операции по очереди
+    :param transactions: Список словарей транзакция
+    :return: Описание транзакции
+    """
     for transaction in transactions:
         yield transaction["description"]
 
 
 def card_number_generator(start: int, end: int):
+    """
+    Генерирует номера карт в формате "XXXX XXXX XXXX XXXX", где X — цифра
+    :param start: Нижний диапазон номеров карт
+    :param end: Верхний диапазон номеров карт
+    :return: Строку с номером карты
+    """
     for i in range(start, end + 1):
         yield f"0000 0000 0000 000{i}"

@@ -1,3 +1,5 @@
+from typing import Generator
+
 transactions_list = [
     {
         "id": 939719570,
@@ -77,7 +79,7 @@ transactions_list = [
 ]
 
 
-def filter_by_currency(transactions: list[dict], currency: str):
+def filter_by_currency(transactions: list[dict], currency: str) -> Generator:
     """
     Возвращает итератор, который выдает по очереди операции с указанием валюты
     :param transactions: Список словарей транзакция
@@ -89,7 +91,7 @@ def filter_by_currency(transactions: list[dict], currency: str):
             yield transaction
 
 
-def transaction_descriptions(transactions: list[dict]):
+def transaction_descriptions(transactions: list[dict]) -> Generator:
     """
     Возвращает описание каждой операции по очереди
     :param transactions: Список словарей транзакция
@@ -99,7 +101,7 @@ def transaction_descriptions(transactions: list[dict]):
         yield transaction["description"]
 
 
-def card_number_generator(start: int, end: int):
+def card_number_generator(start: int, end: int) -> Generator:
     """
     Генерирует номера карт в формате "XXXX XXXX XXXX XXXX", где X — цифра
     :param start: Нижний диапазон номеров карт

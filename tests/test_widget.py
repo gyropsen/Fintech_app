@@ -1,6 +1,5 @@
 import pytest
 
-from typing import Any
 from src.widget import get_description, get_date
 
 
@@ -10,7 +9,7 @@ from src.widget import get_description, get_date
                                                             "Visa Classic 6831 98** **** 7658"),
                                                            ("Счет 73654108430135874305", "Счет **4305")
                                                            ])
-def test_get_description(name_numbers: Any, expected_result: Any) -> None:
+def test_get_description(name_numbers: str, expected_result: str) -> None:
     assert get_description(name_numbers) == expected_result
 
 

@@ -2,7 +2,8 @@ from typing import Generator
 from pathlib import Path
 import json
 
-transactions_list = json.loads(Path("../data", "transactions.json").read_text())
+transactions_list = json.loads(
+    Path(Path.home(), "PycharmProjects", "fintech_app", "data", "transactions.json").read_text())
 
 
 def filter_by_currency(transactions: list[dict], currency: str) -> Generator:
@@ -13,12 +14,6 @@ def filter_by_currency(transactions: list[dict], currency: str) -> Generator:
     :return: Словарь транзакции
     """
     yield from filter(lambda transaction: transaction["operationAmount"]["currency"]["code"] == currency, transactions)
-
-
-usd_transactions = filter_by_currency(transactions_list, "USD")
-
-for _ in range(2):
-    print(next(usd_transactions)["id"])
 
 
 def transaction_descriptions(transactions: list[dict]) -> Generator:

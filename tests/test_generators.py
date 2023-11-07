@@ -7,8 +7,9 @@ from src.generators import filter_by_currency, transaction_descriptions, card_nu
 
 @pytest.fixture
 def get_data() -> list[dict]:
-    transactions_list = json.loads(Path("../data", "transactions.json").read_text())
-    return transactions_list
+    transactions = json.loads(
+        Path(Path.home(), "PycharmProjects", "fintech_app", "data", "transactions.json").read_text())
+    return transactions
 
 
 @pytest.fixture
@@ -26,7 +27,7 @@ def get_expected_result_descriptions() -> list[str]:
 
 
 @pytest.fixture
-def get_get_expected_result_card() -> list[str]:
+def get_expected_result_card() -> list[str]:
     def get_bank_card(card: int) -> str:
         bank_card = str(card)
         while len(bank_card) != 16:
@@ -48,6 +49,6 @@ def test_transaction_descriptions(get_data: list[dict], get_expected_result_desc
         assert next(descriptions) == get_expected_result_descriptions[i]
 
 
-def test_card_number_generator(get_get_expected_result_card: list[str]) -> None:
+def test_card_number_generator(get_expected_result_card: list[str]) -> None:
     for i, card_number in enumerate(card_number_generator(1, 5)):
-        assert card_number == get_get_expected_result_card[i]
+        assert card_number == get_expected_result_card[i]

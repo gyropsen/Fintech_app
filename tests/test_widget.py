@@ -9,9 +9,9 @@ from src.widget import get_description, get_date
                                                             "Visa Classic 6831 98** **** 7658"),
                                                            ("Счет 73654108430135874305", "Счет **4305")
                                                            ])
-def test_get_description(name_numbers, expected_result):
+def test_get_description(name_numbers: str, expected_result: str) -> None:
     assert get_description(name_numbers) == expected_result
 
 
-def test_get_date():
+def test_get_date() -> None:
     assert get_date("2018-07-11T02:26:18.671407") == "11.07.2018"

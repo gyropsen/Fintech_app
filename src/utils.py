@@ -75,6 +75,3 @@ def read_csv_or_xlsx(path: str) -> Any:
     except Exception as error:
         logger.error(f"read_csv_or_xlsx error: {error}")
         return error
-
-
-print(read_csv_or_xlsx("/home/egor/PycharmProjects/fintech_app/data/transactions_excel.xlsx"))

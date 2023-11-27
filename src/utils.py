@@ -44,6 +44,11 @@ def get_amount_transaction(transaction: dict) -> Any:
 
 
 def get_list_transactions(not_formatted_list: list[dict]) -> list[dict]:
+    """
+    Форматирует список в надлежащий вид
+    :param not_formatted_list: неотформатированный список
+    :return: форматированный список
+    """
     list_transactions = []
     for transaction in not_formatted_list:
         list_transactions.append({'id': transaction['id'],

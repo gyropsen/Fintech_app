@@ -36,27 +36,6 @@ def get_amount_transaction(transaction: dict) -> Any:
     raise ValueError("Транзакция выполнена не в рублях. Укажите транзакцию в рублях")
 
 
-def get_list_transactions(not_formatted_list: list[dict]) -> list[dict]:
-    """
-    Форматирует список в надлежащий вид
-    :param not_formatted_list: неотформатированный список
-    :return: форматированный список
-    """
-    list_transactions = []
-    for transaction in not_formatted_list:
-        list_transactions.append({'id': transaction['id'],
-                                  'state': transaction['state'],
-                                  'date': transaction['date'],
-                                  'operationAmount': {'amount': transaction['amount'],
-                                                      'currency': {'name': transaction['currency_name'],
-                                                                   'code': transaction['currency_code']}},
-                                  'description': transaction['description'],
-                                  'from': transaction['from'],
-                                  'to': transaction['to']})
-    logger.info("read_csv_or_xlsx successfully")
-    return list_transactions
-
-
 def read_csv_or_xlsx(path: str) -> Any:
     """
     Чтение финансовых операций с CSV- и XLSX-файлов
@@ -64,6 +43,26 @@ def read_csv_or_xlsx(path: str) -> Any:
     :return: dataframe
     """
     logger.info("Start read_csv_or_xlsx")
+
+    def get_list_transactions(not_formatted_list: list[dict]) -> list[dict]:
+        """
+        Форматирует список в надлежащий вид
+        :param not_formatted_list: неотформатированный список
+        :return: форматированный список
+        """
+        list_transactions = []
+        for transaction in not_formatted_list:
+            list_transactions.append({'id': transaction['id'],
+                                      'state': transaction['state'],
+                                      'date': transaction['date'],
+                                      'operationAmount': {'amount': transaction['amount'],
+                                                          'currency': {'name': transaction['currency_name'],
+                                                                       'code': transaction['currency_code']}},
+                                      'description': transaction['description'],
+                                      'from': transaction['from'],
+                                      'to': transaction['to']})
+        logger.info("read_csv_or_xlsx successfully")
+        return list_transactions
 
     try:
         if ".csv" in path:

@@ -1,6 +1,10 @@
 from pathlib import Path
 import json
 from typing import Any
+import pandas as pd
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 def get_transactions_list(path: str) -> Any:

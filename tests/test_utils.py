@@ -30,7 +30,7 @@ def test_get_amount_transaction_value_error(get_data):
     assert "Транзакция выполнена не в рублях. Укажите транзакцию в рублях" in str(exinfo.value)
 
     with pytest.raises(ValueError) as exinfo:
-        get_amount_transaction(get_transactions_list("/home/egor/PycharmProjects/fintech_app/data/None.json"))
+        get_amount_transaction(get_transactions_list(str(Path(Path(__file__).parent.parent, "data", "None.json"))))
 
     assert "Пустой список" in str(exinfo.value)
 
@@ -42,4 +42,4 @@ def test_read_csv_or_xlsx(mock_read_csv_or_xlsx):
                  'description': 'Перевод организации', 'from': 'Счет 58803664561298323391',
                  'to': 'Счет 39745660563456619397'}
     mock_read_csv_or_xlsx.return_value = test_dict
-    assert read_csv_or_xlsx("/home/egor/PycharmProjects/fintech_app/data/transactions.csv")[0] == test_dict
+    assert read_csv_or_xlsx(str(Path(Path(__file__).parent.parent, "data", "transactions.csv")))[0] == test_dict
